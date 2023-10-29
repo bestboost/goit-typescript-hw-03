@@ -10,10 +10,10 @@ class Key {
 }
 
 class Person {
-  private key: number;
+  private key: object;
 
-  constructor(signature: number) {
-    this.key = signature;
+  constructor(key: object) {
+    this.key = key;
   }
 
   getKey() {
@@ -23,11 +23,11 @@ class Person {
 
 abstract class House {
   public door: boolean;
-  public key: number;
+  public key: object;
   private tenants: string[] = [];
 
-  constructor(signature: number) {
-    this.key = signature;
+  constructor(key: object) {
+    this.key = key;
   }
 
   public comeIn(person) {
@@ -36,14 +36,14 @@ abstract class House {
     }
   }
 
-  public abstract openDoor(signature: number): void;
+  public abstract openDoor(key: object): void;
 }
 
 class MyHouse extends House {
-  constructor(key: number) {
+  constructor(key: object) {
     super(key);
   }
-  openDoor(key: number) {
+  openDoor(key: object) {
     if (key === this.key) {
       return this.door === true;
     }
