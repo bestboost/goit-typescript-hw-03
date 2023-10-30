@@ -44,7 +44,10 @@ class MyHouse extends House {
     super(key);
   }
   openDoor(key: object) {
-    if (key === this.key) {
+    const keys = Object.values(key);
+    const thisKeys = Object.values(this.key);
+
+    if (keys === thisKeys) {
       return this.door === true;
     }
   }

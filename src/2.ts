@@ -15,7 +15,7 @@ class Manager extends Employee {
   constructor(name: string, department: string, salary: number) {
     super(name, department, salary);
 
-    salary += 10000;
+    this.salary += 10000;
   }
 }
 
