@@ -43,11 +43,13 @@ class MyHouse extends House {
   constructor(key: object) {
     super(key);
   }
-  openDoor(key: object) {
-    const keys = Object.values(key);
-    const thisKeys = Object.values(this.key);
 
-    if (keys === thisKeys) {
+  getSignature() {
+    return key === this.key;
+  }
+
+  openDoor(key: object) {
+    if (key === this.key) {
       return this.door === true;
     }
   }
