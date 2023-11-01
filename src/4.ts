@@ -1,5 +1,10 @@
-class Key {
+interface KeyInterface {
+  getSignature(): number;
+}
+
+class Key implements KeyInterface {
   private signature: number;
+
   constructor() {
     this.signature = Math.random();
   }
@@ -10,9 +15,9 @@ class Key {
 }
 
 class Person {
-  private key: object;
+  private key: KeyInterface;
 
-  constructor(key: object) {
+  constructor(key: KeyInterface) {
     this.key = key;
   }
 
@@ -23,10 +28,10 @@ class Person {
 
 abstract class House {
   public door: boolean;
-  public key: object;
+  public key: KeyInterface;
   private tenants: string[] = [];
 
-  constructor(key: object) {
+  constructor(key: KeyInterface) {
     this.key = key;
   }
 
@@ -36,21 +41,17 @@ abstract class House {
     }
   }
 
-  public abstract openDoor(key: object): void;
+  public abstract openDoor(key: KeyInterface): void;
 }
 
 class MyHouse extends House {
-  constructor(key: object) {
+  constructor(key: KeyInterface) {
     super(key);
   }
 
-  getSignature() {
-    return key === this.key;
-  }
-
-  openDoor(key: object) {
-    if (key === this.key) {
-      return this.door === true;
+  openDoor(key: KeyInterface) {
+    if (key.getSignature() === this.key.getSignature()) {
+      this.door = true;
     }
   }
 }
@@ -64,5 +65,3 @@ const person = new Person(key);
 house.openDoor(person.getKey());
 
 house.comeIn(person);
-
-export {};
